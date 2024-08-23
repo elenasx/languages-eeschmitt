@@ -1,0 +1,44 @@
+Models of Computation
+    NAND is functionally complete
+        x -> [any bool func] -> y
+        easy
+    
+    Von Neumann
+        ↓ Stack
+        ↑ Heap               <---sp---
+        ---------------------        |
+        Globals                     ALU
+        ---------------------
+        Literals (constants)     Registers
+        ---------------------        |
+        Text/Code            <---pc---
+
+    NAND -> Von Neumann
+    Perceptron -> Neural network
+
+    CPU (most run on these two chipsets)
+    intel
+    ARM
+
+    Dev container:
+    ctrl+shift+p
+    
+
+    Models of Computation
+                        NOR
+    Classical Computer (NAND) -> Von Neumann Machine
+                                 Harvard Architecture
+
+    Harvard Architecture
+        Stack ↓
+        Heap ↑
+
+        Globals
+        ---------------------
+        Literals              ----
+        ---------------------     |--> ROM
+        Code                  ----
+
+    Neural Network (Perceptron -> Neural net)
+
+
