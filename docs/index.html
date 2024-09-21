@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Logic Programming</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div class="container">
+        Encryption Tool
+    </div>
+    
+    <div class="main">
+        <h2 id="title">Caesar Cipher</h2>
+        <label for="text">Enter text</label><br>
+        <textarea id="text" placeholder="Enter text (only letters A-Z will be encrypted)" rows="4" cols="50"></textarea><br>
+
+        <label for="shift">Enter shift value</label><br>
+        <input type="number" id="shift" min="1" max="25" value="1"><br>
+
+        <button id="encrypt">Encrypt</button>
+
+        <h3>Encryption Result</h3>
+        <div id="result" class="result"></div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
