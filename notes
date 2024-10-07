@@ -95,10 +95,73 @@ Programming Models
         • Result is the same when the inputs are the same
             ↓ return value
     
+       Data       / SQL (relational db)
+         ↓     DB \ NOSQL (document)
+       State   /     
+       ↑   ↓       Requests for state changes
+    Transactions   (don't say how, just what)
 
+    SQL
+    User        Order       Item
 
+    Transaction
+    C (Create)
+    R (Retrieve)
+    U (Update)
+    D (Delete)
 
+    Join
+    user x order
 
+OO:
+-> Maps do have human cognition
+-> Concepts
 
-ChatGPT:
-What are some languages that emphasize functional programming style?
+Object-Based Programming
+-> class Pencil{
+      Color color;          --> property
+      void white(...){...}  --> method
+   }
+
+Single inheritance
+    only 1 parent
+Multiple inheritance
+    more than 1 parent
+
+Pencil is a kind of writing instrument
+    Projectile        Writing Instr.
+              \      /
+               Pencil
+
+Virtual inheritance
+    Diamond of death
+
+Object Oriented Programming
+
+Validation
+Bobby; drop table users;
+Username        Regular
+Email    <--> Expressions
+
+Regular Expressions
+Language that represent sets of strings
+-Pretty convenient for humans
+-Translated into matchers in node.
+                             Strings
+                            /
+RE -> RE computer -> Matcher
+                            \
+                             Find matches of RE
+                             in the string
+// is a RE that matches the empty string // -> {""}
+/x/
+/n/
+/$/
+RS
+{"x"} Set of strings that is the single empty string
+" the beginning of a string
+
+matches all the strings that can be split into 2 parts
+m = r + s when r matches R and s matches S.
+       \ 
+        concatenation
