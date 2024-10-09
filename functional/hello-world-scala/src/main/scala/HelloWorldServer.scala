@@ -4,10 +4,18 @@ import akka.actor.typed.ActorSystem
 import akka.actor.typed.scaladsl.Behaviors
 import akka.http.scaladsl.Http
 import akka.http.scaladsl.server.Directives._
+import akka.http.scaladsl.marshallers.sprayjson.SprayJsonSupport._
+import spray.json.DefaultJsonProtocol._
+import spray.json._
+import scala.io.Source
 
 import scala.io.StdIn
 
 object HelloWorldServer {
+
+  implicit val stringListFormat = jsonFormat1(ListRequest)
+
+  case class ListRequest(items: List[String])
 
   def main(args: Array[String]): Unit = {
     // Create an ActorSystem
@@ -20,6 +28,19 @@ object HelloWorldServer {
         get {
           complete(s"Hello, $person!")
         }
+      } ~
+      path("sort") {
+        post {
+          entity(as[ListRequest]) { request =>
+            complete(request.items.sorted)  
+          }
+        }
+      } ~
+      path("sortjson") {
+        get {
+          val items = readJsonFromFile("src/main/resources/test.json")
+          complete(items.sorted)
+        }
       }
 
     // Start the server
@@ -30,5 +51,17 @@ object HelloWorldServer {
     bindingFuture
       .flatMap(_.unbind()) // Unbind from the port
       .onComplete(_ => system.terminate()) // Terminate the system when done
+  }
+
+  // Method to read JSON from a file and extract the items
+  def readJsonFromFile(filePath: String): List[String] = {
+    val source = Source.fromFile(filePath)
+    try {
+      val jsonString = source.getLines().mkString
+      val jsonAst = jsonString.parseJson
+      jsonAst.convertTo[ListRequest].items
+    } finally {
+      source.close()
+    }
   }
 }
