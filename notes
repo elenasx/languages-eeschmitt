@@ -165,3 +165,33 @@ matches all the strings that can be split into 2 parts
 m = r + s when r matches R and s matches S.
        \ 
         concatenation
+
+E -> T
+E -> T add E
+T -> F
+T -> F mul T
+F -> lp E rp
+F -> number
+
+number = /[0-9]+/
+lp = /(/
+rp = /)/
+add = /+/
+mul = /*/
+
+Tokens/Terminals
+    {nuber, lp, rq, add, mul}
+N-T
+    {E, T, F}
+
+3 * (7 + 5)
+Last thing that has to happen at the top of the tree.
+    E
+    T
+F   *   T
+n(3)    F
+       (E)
+     T  +  E
+     F     T
+    n(5)   F
+          n(7)
