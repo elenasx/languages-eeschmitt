@@ -195,3 +195,73 @@ n(3)    F
      F     T
     n(5)   F
           n(7)
+
+Grammar:
+Token
+    terminals -- token type/token
+    Non-terminals
+    NT -> some string
+
+                  scanner            parse
+                     ↓                 ↓
+Byte Stream -> UTF8 -> Token Stream    ->    Abstract Syntax Tree
+    ↓           ↓           ↓
+  read()      omitted  getNextToken()
+put-back()
+
+ AST Node
+ /  |  \
+NN  UO  BO
+
+NN: N n
+UO: Unary operator
+BO: Binary operator
+
+PM (plus/minus) MD(multiply/divide)
+Parse -> Expression eof
+Exp -> Term [PM TERM]*
+PM -> '+'|'-'
+Term -> Factor [MD Factor]*
+MD -> '*'|'/'
+Factor -> PM Factor |number| LP EXP RP
+
+Right recursion:
+E -> t | T + E
+Left recursion:
+E -> T | E + T
+↑        ↑
+non-terminal
+on left
+
+      ___________
+stack| x, y      |} frame
+  ↓  | |  ↓--> 4 |
+     | ↓--> 3    |
+  ↑  |           |
+ head|           |
+  ↓  |   this    |
+     |___________|
+     | code text |
+     |___________|
+
+
+const int *x = new int(3)
+const int *y = x;
+(*y) = (*y) + 1 <- does not work
+
+ ________
+|bool    |
+|int     |
+|float   |
+|str     |
+|________|
+   ↓
+primitive types 
+are immutable
+
+std::shared_ptr<const int> x;
+std::make_ptr<const int>(3);
+Garbage collection
+
+Mark-sweep g.c.
+
