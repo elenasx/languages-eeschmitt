@@ -8,7 +8,7 @@ import akka.http.scaladsl.marshallers.sprayjson.SprayJsonSupport._
 import spray.json.DefaultJsonProtocol._
 import spray.json._
 import scala.io.Source
-
+// adds necessary imports for json
 import scala.io.StdIn
 
 object HelloWorldServer {
@@ -29,14 +29,14 @@ object HelloWorldServer {
           complete(s"Hello, $person!")
         }
       } ~
-      path("sort") {
+      path("sort") { // sorts the items given in the request
         post {
           entity(as[ListRequest]) { request =>
             complete(request.items.sorted)  
           }
         }
       } ~
-      path("sortjson") {
+      path("sortjson") { //sorts the items from the test.json file
         get {
           val items = readJsonFromFile("src/main/resources/test.json")
           complete(items.sorted)
@@ -53,7 +53,7 @@ object HelloWorldServer {
       .onComplete(_ => system.terminate()) // Terminate the system when done
   }
 
-  // Method to read JSON from a file and extract the items
+  // Function to take in a path to a json file and read through the items
   def readJsonFromFile(filePath: String): List[String] = {
     val source = Source.fromFile(filePath)
     try {

@@ -60,3 +60,90 @@ In summary, templates represent a meta-functional style by promoting code reusab
 We defined a simple StringList case class to hold the list of strings.
 3. **New Route for Sorting**
 We added a new route at /sort that handles POST requests. It extracts the list of strings from the JSON body, sorts them, and responds with the sorted list.
+
+```JS
+import akka.actor.typed.ActorSystem
+import akka.actor.typed.scaladsl.Behaviors
+import akka.http.scaladsl.Http
+import akka.http.scaladsl.server.Directives._
+import akka.http.scaladsl.marshallers.sprayjson.SprayJsonSupport._
+import spray.json.DefaultJsonProtocol._
+import spray.json._
+import scala.io.Source
+
+import scala.io.StdIn
+
+object HelloWorldServer {
+
+  implicit val stringListFormat = jsonFormat1(ListRequest)
+
+  case class ListRequest(items: List[String])
+
+  def main(args: Array[String]): Unit = {
+    // Create an ActorSystem
+    implicit val system = ActorSystem(Behaviors.empty, "helloWorldSystem")
+    implicit val executionContext = system.executionContext
+
+    // Define the route
+    val route =
+      path("greet" / Segment) { person =>
+        get {
+          complete(s"Hello, $person!")
+        }
+      } ~
+      path("sort") {
+        post {
+          entity(as[ListRequest]) { request =>
+            complete(request.items.sorted)  
+          }
+        }
+      }
+
+    // Start the server
+    val bindingFuture = Http().newServerAt("localhost", 8080).bind(route)
+
+    println("Server online at http://localhost:8080/\nPress RETURN to stop...")
+    StdIn.readLine() // Keep the server running until user presses return
+    bindingFuture
+      .flatMap(_.unbind()) // Unbind from the port
+      .onComplete(_ => system.terminate()) // Terminate the system when done
+  }
+}
+```
+
+#### What code would I need to finish this path so that it takes in the items to sort from a JSON file:
+```JS
+   path("sortjson") {
+      
+   }
+```
+
+To modify your code so that it reads JSON from a file and organizes it based on a new path called sortjson, you need to:
+   - Add a method to read JSON from a file.
+   - Parse the file content into a suitable data structure (like a ListRequest).
+   - Add a new route (/sortjson) that reads JSON from a file, sorts the items, and returns the result.
+
+Here’s how you can do it:\
+Steps:
+   - Add a file-reading function that reads JSON data from a file.
+   - Modify the route to handle a new /sortjson endpoint, which will read the data from the file, process it, and return the sorted items.
+```JS
+   path("sortjson") {
+      get {
+         val items = readJsonFromFile("src/main/resources/test.json")
+         complete(items.sorted)
+      }
+   }
+
+
+  def readJsonFromFile(filePath: String): List[String] = {
+    val source = Source.fromFile(filePath)
+    try {
+      val jsonString = source.getLines().mkString
+      val jsonAst = jsonString.parseJson
+      jsonAst.convertTo[ListRequest].items
+    } finally {
+      source.close()
+    }
+  }
+```
