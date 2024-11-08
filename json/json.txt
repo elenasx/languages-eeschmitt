@@ -61,9 +61,9 @@ string    element     string   element
          |       |       member              member
        value   value     ___|___            ___|___
          |       |      |       |          |       | 
-         1       2    string  element    string  element
+       num(1)  num(2) string  element    string  element
                         |       |          |       |
                       "size"  value      "use"   value
                                 |                  |
-                                33                True
+                            number(33)         bool(True)
 
