@@ -289,3 +289,53 @@ something(x, y) ->
 
 def something(a, b):
     a = 3
+
+Logic/Constraint
+SQL- descriptive of data transactions
+Prolog- queries a knowledge database
+
+E -> T | T + E
+T -> F | F * T
+F -> (E) | n
+
+Abstract syntax tree
+(simple arith) 
+[meaning]
+
+Parse tree
+(3+5)
+    P.T
+     ↓
+     E
+     ↓
+     T
+     ↓
+     F
+     ↓
+    (E)
+     ↓
+   T + E
+   ↓   ↓
+   F   T
+   ↓   ↓
+  n(3) F
+       ↓
+      n(5)
+
+Bytes -> Chars -> Tokens -> AST
+                ↓         ↓
+            scanner     Parser
+             lexer      /    \
+                  Recurs.     Shift
+                  descent     reduce
+                     ↓           ↓     Tool build (prefers left recurs.)
+                 looks like   shift in tokens
+  Hand build     grammar      from lex/scanner
+  (cant do       /                      \
+  left recur.)  /                        \
+        AST *exp(){             once some grammar rule
+            AST *t = term();    is certain, reduce using
+            if(match('+'))      that rule
+                append(expr())         n+
+        }                       E prefers to be on left
+E can't be on left
