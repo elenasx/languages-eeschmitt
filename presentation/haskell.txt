@@ -1,0 +1,5 @@
+Final Presentation:
+Why was this language created
+What are the typical ways this language is used.
+Write a program in this lanugage.
+~10 minutes

@@ -166,6 +166,7 @@ m = r + s when r matches R and s matches S.
        \ 
         concatenation
 
+Exam 2:
 E -> T
 E -> T add E
 T -> F
@@ -180,7 +181,7 @@ add = /+/
 mul = /*/
 
 Tokens/Terminals
-    {nuber, lp, rq, add, mul}
+    {number, lp, rq, add, mul}
 N-T
     {E, T, F}
 
@@ -339,3 +340,33 @@ Bytes -> Chars -> Tokens -> AST
                 append(expr())         n+
         }                       E prefers to be on left
 E can't be on left
+
+
+Exam 2:
+1. RE are descriptions of matchers that match sets of strings, they are built up from parts sort of like algebra equations. Ex. cats? matches "cat" or "cats" They are used in data validation in forms + exchanges and in prog. languages are used to identify tokens.
+2. Context free grammars are substitution rules like E -> T | T, that define a set of strings (similar to RE's). They are more powerful than regular expressions (turing complete). They are used to define languages and their structure, like if_statement -> If expr then block, etc. They are used in parsers to create parse trees, and most importantly abstract syntax trees to define the structure of the language.
+3. 
+4. Left recursion in RDP like E -> E + T | T, cause infinite recursion in the parser (because matching E asks to match without consuming any tokens).
+5. UTF-8 is a standard multibyte encoding for unicode characters. This is commonly how byte oriented data like files, sockets, web connections are converted to characer streams, so the first stage of any modern scanner. bytes -> chars -> tokens -> trees
+6. Mark-sweep stops all threads, and marks all the objects referred to by the stacks of those threads. Then it recursively marks all objects they refer to (like a fill-paint). Once all reachable objects are marked, the remainder are unreachablle and so are swept. The garbage collector may further pack the remaining objects to free up gaps. Guaranteed correct, but forces arbitrary stops of all work (unsuitable for real time applications).
+7. x = 3 Lets x refer to the 3 number object. Then x = x + 1 creates a new object (number 4) that x refers to. If nothing refers to the 3, it may be cleaned up.
+8. In an everything is an object language, arguments are passed by value, which are all references to objects on the heap. This creates lots of aliases, which would be hard to follow if they could be mutated. By making primitive types immutable this making writing code understandable.
+9. Prolog's reasoning is based on specific rules defined by the programmer. So the logic it follows is certain. Machine learning cannot guarantee any outcome (and is expensive), so if you cannot guarantee something, it's hard to bet your life on it.
+10. (x+3) * y
+        E
+        ↓
+        T
+        ↓
+    T   *   F
+    ↓       ↓
+    F      id(y)
+    ↓
+   (E)
+    ↓
+E   +   T
+↓       ↓
+T       F
+↓       ↓
+F     num(3)
+↓
+id(x)
