@@ -3,3 +3,49 @@ Why was this language created
 What are the typical ways this language is used.
 Write a program in this lanugage.
 ~10 minutes
+
+Categorization
+    Programming paradigm, model of computation, 
+    typing discipline, control flow
+Why was it created?
+Use cases
+Demonstration
+
+Compile/run:
+-- sudo apt install ghc cabal-install
+-- ghc -o main main.hs && ./main
+-- ghc -o maybe maybe.hs && ./maybe
+
+https://medium.com/sourcescribes/what-is-haskell-853b6949a800:
+No statements or instructions, only expressions that cannot mutate variables or access states like time or random numbers.
+Programs are written like mathematical functions
+Monads: describes computations as sequences of steps which handle side effects. Constructed on top of a polymorphic type such as IO. Used for input/output, error handling, and state management.
+Monad class has three functions: 
+    return: takes value and puts it in monadic context 
+    (>>=): "bind" chains together monadic computations
+    (>>): "then" sequences two monadic computations, ignoring the result of the first
+
+
+Slides:
+What is Haskell?
+
+
+History of Haskell
+Inspired by other functional languages at the time like ML, Hope, and Miranda.
+
+Where It's Used
+Teaching
+Research
+Industry
+
+Monads
+Provide a way to handle computations that can cause side effects, like input and output while keeping the program pure.
+Return: Takes a value "a" and wraps it with the monad, producing m a.
+Bind: Allows you to chain together monadic operations. If you need to perform a set of computations that could have side effects, this allows you to use a function on the value inside the monad.
+Then: 
+
+Typeclasses
+Eq (==) (/=): equality and ineqality
+Ord (<, >, <=, >=):
+Functor: apply a function to values that are inside a context like maybe, list
+
