@@ -1,7 +1,7 @@
 Final Presentation:
 Why was this language created
 What are the typical ways this language is used.
-Write a program in this lanugage.
+Write a program in this language.
 ~10 minutes
 
 Categorization
@@ -28,15 +28,25 @@ Monad class has three functions:
 
 Slides:
 What is Haskell?
-
+Created to be a pure functional language and have no side effects.
+All types of expressions are checked before the program is actually and they do not change during execution.
+Has higher order functions that are able to take in other functions as parameters and are also able to return functions.
+Utilizes lazy evaluations so expressions are not evaluated until they are actually needed.
+Uses garbage collection, most commonly generational garbage collector which splits everything into regions based on the age of objects.
 
 History of Haskell
+Named after Haskell Brooks Curry due to his contribution in combinatory logic, which is the basis of functional programming.
 Inspired by other functional languages at the time like ML, Hope, and Miranda.
 
 Where It's Used
 Teaching
+- Good for learning programming concepts
 Research
+- Strength in reasoning, useful for statistics
+- Ability to handle large datasets
 Industry
+- Used in areas like aerospace, finance, and healthcare
+- Good at handling real-time streams
 
 Monads
 Provide a way to handle computations that can cause side effects, like input and output while keeping the program pure.
@@ -49,7 +59,7 @@ Common monads:
 Maybe: represents computations that might fail (Just, nothing)
 Either: expands on maybe monad (left-error, right-success)
 List: represents computations that can have multiple results
-IO: Handles input and output while maining purity
+IO: Handles input and output while maintaining purity
 
 Typeclasses
 More abstract compared to classes in other languages
@@ -64,4 +74,3 @@ Polymorphism- functions can work with multiple different types
 Eq (==) (/=): equality and inequality
 Ord (<, >, <=, >=): 
 Functor: apply a function to values that are inside a context like maybe, list
-
