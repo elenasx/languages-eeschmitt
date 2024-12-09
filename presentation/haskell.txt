@@ -40,12 +40,28 @@ Industry
 
 Monads
 Provide a way to handle computations that can cause side effects, like input and output while keeping the program pure.
+
 Return: Takes a value "a" and wraps it with the monad, producing m a.
 Bind: Allows you to chain together monadic operations. If you need to perform a set of computations that could have side effects, this allows you to use a function on the value inside the monad.
-Then: 
+Then: Similar to bind as they allow you to chain together monadic operations, but they ignore the results of the original/previous operation. Used for when order of operation matters.
+
+Common monads:
+Maybe: represents computations that might fail (Just, nothing)
+Either: expands on maybe monad (left-error, right-success)
+List: represents computations that can have multiple results
+IO: Handles input and output while maining purity
 
 Typeclasses
-Eq (==) (/=): equality and ineqality
-Ord (<, >, <=, >=):
+More abstract compared to classes in other languages
+Define a set of methods that are shared between multiple types
+Only able to accept certain types for a function
+Compile-time type restraints
+Types are checked before running
+Have set operations so that they behave consistently
+Inheritance allows for creating more specific types
+Polymorphism- functions can work with multiple different types
+
+Eq (==) (/=): equality and inequality
+Ord (<, >, <=, >=): 
 Functor: apply a function to values that are inside a context like maybe, list
 
